@@ -1,15 +1,24 @@
 // Test away!
-import axios from "axios"
+
 import React from "react";
 import * as rtl from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import Controls from "./Controls";
+import {fireEvent} from '@testing-library/react';
 
-test("<App /> snapshot", async () => {
+afterEach(rtl.cleanup);
+
+test("<App /> snapshot", () => {
   const wrapper = rtl.render(<Controls />)
-  await wrapper.queryAllByText(/lock/i);
 
-  // Saves our snapshot to disk, or checks an existing snapshot on the disk.
-  // If it looks at all different, the test will fail.
   expect(wrapper.asFragment()).toMatchSnapshot()
 })
+
+test("button changes if clicked",() => {
+    const { getByText, findByText } = rtl.render(<Controls />)
+    const btn1 = getByText(/close gate/i)
+    rtl.act(() => {
+        fireEvent.click(btn1)
+    })
+})
+
