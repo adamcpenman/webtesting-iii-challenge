@@ -15,7 +15,7 @@ test("<App /> snapshot", () => {
 
 
 test('default state is open and unlocked', () => {
-    const  {queryByText}  = rtl.render(<Dashboard />)
+    const {queryByText} = rtl.render(<Dashboard />)
 
     expect(queryByText(/open/i)).toBeTruthy()
     expect(queryByText(/unlocked/i)).toBeTruthy()
